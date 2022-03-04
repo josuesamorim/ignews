@@ -1,5 +1,5 @@
-import { AiFillGithub } from 'react-icons/Ai'
 import styles from '../../styles/Header.module.scss'
+import { SignInButton } from './SignInButton'
 
 export function Header() {
   return (
@@ -8,15 +8,12 @@ export function Header() {
         <img src="logo.svg" alt="IgNews" />
         <nav>
           <ul>
-            <li>Home</li>
+            <li className={styles.active}>Home</li>
             <li>Posts</li>
           </ul>
         </nav>
 
-        <button>
-          <AiFillGithub />
-          Sign in with github
-        </button>
+        <SignInButton />
       </div>
     </div>
   )
