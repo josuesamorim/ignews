@@ -1,0 +1,46 @@
+.Container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column: 1;
+  max-width: 70rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+  padding: 0 2rem;
+
+  p {
+    font-weight: 700;
+    color: var(--titles);
+    line-height: 34px;
+    font-size: 24px;
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-weight: 900;
+    line-height: 72px;
+    font-size: 72px;
+    color: white;
+    margin-bottom: 1.5rem;
+
+    span {
+      color: var(--blue);
+    }
+  }
+
+  h2 {
+    font-weight: 700;
+    color: white;
+    line-height: 36px;
+    font-size: 24px;
+    margin-bottom: 2.5rem;
+
+    span {
+      color: var(--blue);
+    }
+  }
+}
+
+.WomanCoding {
+  grid-column: 2;
+  justify-self: end;
+}

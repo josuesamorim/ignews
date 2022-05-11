@@ -1,0 +1,29 @@
+.Content {
+  button {
+    width: 13.625rem;
+    height: 3rem;
+    background-color: var(--shape);
+    color: white;
+    border: 0;
+    border-radius: 6.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    transition: filter 0.2s;
+
+    svg:first-child {
+      margin-right: 0.5rem;
+      font-size: 20px;
+    }
+
+    svg:last-child {
+      margin-left: 0.5rem;
+    }
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
