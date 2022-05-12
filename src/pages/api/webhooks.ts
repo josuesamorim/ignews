@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Readable } from 'stream'
 import Stripe from 'stripe'
-import { saveSubscription } from '../../pages/api/_lib/manageSubscription'
 
 import { stripe } from '../../services/stripe'
+import { saveSubscription } from './_lib/manageSubscription'
 
 async function buffer(readable: Readable) {
   const chunks = []
@@ -54,7 +54,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
             await saveSubscription(
               subscription.id,
-              subscription.customer.toString()
+              subscription.customer.toString(),
+              false
             )
 
             break
@@ -64,7 +65,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
             await saveSubscription(
               checkoutSession.subscription.toString(),
-              checkoutSession.customer.toString()
+              checkoutSession.customer.toString(),
+              true
             )
 
             break
