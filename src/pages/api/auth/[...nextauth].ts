@@ -21,7 +21,9 @@ export default NextAuth({
         await fauna.query(
           q.If(
             q.Not(
-              q.Exists(q.Match(q.Index('user_email'), q.Casefold(user.email)))
+              q.Exists(
+                q.Match(q.Index('user_by_email'), q.Casefold(user.email))
+              )
             ),
             q.Create(q.Collection('users'), {
               data: {
@@ -29,12 +31,12 @@ export default NextAuth({
                 name: user.name
               }
             }),
-            q.Get(q.Match(q.Index('user_email'), q.Casefold(user.email)))
+            q.Get(q.Match(q.Index('user_by_email'), q.Casefold(user.email)))
           )
         )
         return true
       } catch {
-        console.log('Houve um problema ao salvar os dados no DB')
+        console.log('Erro ao salvar dados no DB')
         return false
       }
     }
