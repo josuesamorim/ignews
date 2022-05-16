@@ -1,3 +1,6 @@
+import { GetStaticProps } from 'next'
+import { getPrismicClient } from '../../services/prismic'
+import Prismic from '@prismicio/client'
 import styles from '../posts/styles.module.scss'
 
 export default function Posts() {
@@ -24,4 +27,24 @@ export default function Posts() {
       </div>
     </main>
   )
+}
+
+const getStaticProps: GetStaticProps = async () => {
+  const prismic = getPrismicClient()
+
+  const response = await prismic.query(
+    [Prismic.predicates.at('document.type', 'ignews')],
+    {
+      fetch: ['ignews.title', 'ignews.content'],
+      pageSize: 100
+    }
+  )
+
+  console.log(response)
+
+  return {
+    props: {
+      response
+    }
+  }
 }
