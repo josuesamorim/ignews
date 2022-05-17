@@ -1,50 +1,80 @@
 import { GetStaticProps } from 'next'
 import { getPrismicClient } from '../../services/prismic'
+import { RichText } from 'prismic-dom'
+
+import Head from 'next/head'
 import Prismic from '@prismicio/client'
-import styles from '../posts/styles.module.scss'
 
-export default function Posts() {
+import styles from './styles.module.scss'
+import Link from 'next/link'
+
+type Post = {
+  slug: string
+  title: string
+  excerpt: string
+  updatedAt: string
+}
+
+interface PostsProps {
+  posts: Post[]
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
-    <main className={styles.container}>
-      <div className={styles.post}>
-        <a href="http://localhost:3000">
-          <time>15 de março de 2022</time>
-          <h1>Creating a Monorepo with Lerna & Yarn Workspaces</h1>
-          <p>
-            In this guide, you will learn how to create a Monorepo to manage
-            multiple packages with a shared build, test, and release process.
-          </p>
-        </a>
+    <>
+      <Head>
+        <title>Posts | Ignews</title>
+      </Head>
 
-        <a href="http://localhost:3000">
-          <time>15 de março de 2022</time>
-          <h1>Creating a Monorepo with Lerna & Yarn Workspaces</h1>
-          <p>
-            In this guide, you will learn how to create a Monorepo to manage
-            multiple packages with a shared build, test, and release process.
-          </p>
-        </a>
-      </div>
-    </main>
+      <main className={styles.container}>
+        {posts.map(post => (
+          // <Link key={post.slug} href={`/posts/${post.slug}`}>
+          <div className={styles.posts}>
+            <a href="#">
+              <time>{post.updatedAt}</time>
+              <strong>{post.title}</strong>
+              <p>{post.excerpt}</p>
+            </a>
+          </div>
+          // </Link>
+        ))}
+      </main>
+    </>
   )
 }
 
-const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient()
 
-  const response = await prismic.query(
-    [Prismic.predicates.at('document.type', 'ignews')],
+  const response = await prismic.query<any>(
+    [Prismic.predicates.at('document.type', 'ignews385')],
     {
-      fetch: ['ignews.title', 'ignews.content'],
+      fetch: ['ignews385.title', 'ignews385.content'],
       pageSize: 100
     }
   )
 
-  console.log(response)
+  const posts = response.results.map(post => {
+    return {
+      slug: post.uid,
+      title: RichText.asText(post.data.title),
+      excerpt:
+        post.data.content.find(content => content.type === 'paragraph')?.text ??
+        '',
+      updatedAt: new Date(post.last_publication_date).toLocaleDateString(
+        'pt-BR',
+        {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric'
+        }
+      )
+    }
+  })
 
   return {
     props: {
-      response
+      posts
     }
   }
 }
