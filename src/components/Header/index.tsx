@@ -1,32 +1,29 @@
-import styles from '../../styles/Header.module.scss'
-import { SignInButton } from './SignInButton'
-import Link from 'next/link'
-import Head from 'next/head'
+import styles from './styles.module.scss';
+import { SignInButton } from './SignInButton';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export function Header() {
+
+  const { asPath } = useRouter()
+
   return (
-    <>
-      <Head>
-        <title>ignews | Posts</title>
-      </Head>
+    <header className={styles.headerContainer}>
+      <div className={styles.headerContent}>
+        <img src="/images/logo.svg" alt="Ig News" />
+        <nav>
 
-      <div className={styles.Container}>
-        <div className={styles.Content}>
-          <img src="logo.svg" alt="IgNews" />
-          <nav>
-            <ul>
-              <li className={styles.active}>
-                <Link href="http://localhost:3000">Home</Link>
-              </li>
-              <li>
-                <Link href="http://localhost:3000/posts">Posts</Link>
-              </li>
-            </ul>
-          </nav>
+          <Link href="/" >
+            <a className={asPath == '/' ? styles.active : ''}>Home</a>
+          </Link>
 
-          <SignInButton />
-        </div>
+          <Link href="/posts" >
+            <a className={asPath == '/posts' ? styles.active : ''}>Posts</a>
+          </Link>
+
+        </nav>
+        <SignInButton />
       </div>
-    </>
+    </header>
   )
 }
