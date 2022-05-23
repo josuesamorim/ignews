@@ -15,7 +15,6 @@ export default NextAuth({
       }
     })
   ],
-  secret: process.env.SECRET,
   callbacks: {
     async session({session}){
     try {
@@ -77,5 +76,6 @@ export default NextAuth({
         return false
       }
     }
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 })
