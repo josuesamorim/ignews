@@ -1,5 +1,5 @@
-import { AiFillGithub } from 'react-icons/Ai'
-import { FiX } from 'react-icons/Fi'
+import { AiFillGithub } from 'react-icons/ai'
+import { FiX } from 'react-icons/fi'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import styles from '../SignInButton/styles.module.scss'
 
