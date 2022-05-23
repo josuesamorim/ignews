@@ -1,0 +1,17 @@
+.active{
+
+    color: white;
+    font-weight: bold;
+
+    &::after {
+      content: '';
+      height: 3px;
+      border-radius: 3px;
+      width: 100%;
+      position: absolute;
+      bottom: 1px;
+      left: 0;
+      background: var(--yellow);
+    }
+  
+}

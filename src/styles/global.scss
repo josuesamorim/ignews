@@ -44,7 +44,18 @@ button {
   cursor: pointer;
 }
 
+strong,
+h1 {
+  color: var(--titles);
+}
+
+time,
+p {
+  color: var(--dark-text);
+}
+
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }

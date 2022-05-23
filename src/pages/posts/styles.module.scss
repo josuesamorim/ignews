@@ -10,8 +10,8 @@
 
   a {
     display: block;
-    
-    & + a {
+
+    &+a {
       margin-top: 2rem;
       padding-top: 2rem;
       border-top: 1px solid var(--line);
@@ -21,9 +21,10 @@
       font-size: 1rem;
       display: flex;
       align-items: center;
-      color: 
-      #A8A8B3;
+      color:
+        #A8A8B3;
     }
+
     strong {
       display: block;
       font-size: 1.5rem;
@@ -32,6 +33,7 @@
       transition: color 0.2s;
       color: var(--titles);
     }
+
     p {
       color: #A8A8B3;
       margin-top: 0.5rem;
@@ -41,5 +43,11 @@
     &:hover strong {
       color: var(--yellow);
     }
+  }
+
+  &.previewContent {
+    background: linear-gradient(var(--dark-text), transparent);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
