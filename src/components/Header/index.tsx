@@ -2,6 +2,7 @@ import styles from './styles.module.scss';
 import { SignInButton } from './SignInButton';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export function Header() {
 
@@ -10,7 +11,9 @@ export function Header() {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
-        <img src="/logo.svg" alt="Ig News" />
+        <Link href="/" passHref>
+          <Image src="/logo.svg" alt="Ig News" />
+        </Link>
         <nav>
 
           <Link href="/" >
