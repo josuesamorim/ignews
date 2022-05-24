@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { stripe } from '../../services/stripe'
+import { stripe } from '../../../services/stripe'
 import { getSession } from 'next-auth/react'
-import { fauna } from '../../services/fauna'
-import { Casefold, query as q } from 'faunadb'
+import { fauna } from '../../../services/fauna'
+import { query as q } from 'faunadb'
 
 interface User {
   ref: {
